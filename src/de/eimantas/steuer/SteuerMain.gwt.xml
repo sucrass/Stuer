@@ -3,8 +3,8 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.google.gwt.user.theme.clean.Clean' />
+	<inherits name='com.sencha.gxt.ui.GXT' />
 	<source path='shared' />
-
 	<source path="client" />
 	<entry-point class="de.eimantas.steuer.client.SteuerMain" />
 
