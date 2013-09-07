@@ -47,7 +47,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				presenter = new MainPresenter(rpcService, eventBus,
 						new MainView());
 			} else if (token.equals("neu")) {
-				System.out.println("Fick Dich!");
+				presenter = new MainPresenter(rpcService, eventBus,
+						new MainView());
 			}
 			// else if (token.equals("add")) {
 			// presenter = new EditContactPresenter(rpcService, eventBus,
