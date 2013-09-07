@@ -1,6 +1,5 @@
 package de.eimantas.steuer.client.ui.main;
 
-import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -9,6 +8,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.eimantas.steuer.client.ui.main.dashboard.Dashboard;
 
 public class MainView extends Composite {
 	public MainView() {
@@ -50,9 +51,7 @@ public class MainView extends Composite {
 		mainDynContainer.setCellHeight(verticalPanel_1, "100%");
 		mainDynContainer.setCellWidth(verticalPanel_1, "100%");
 
-		CellTable<Object> cellTable = new CellTable<Object>();
-		verticalPanel_1.add(cellTable);
-		cellTable.setSize("100%", "100%");
+		verticalPanel_1.add(new Dashboard());
 
 		VerticalPanel untereLeiste = new VerticalPanel();
 		untereLeiste

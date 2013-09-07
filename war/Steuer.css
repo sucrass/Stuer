@@ -37,3 +37,23 @@ h1 {
 	font-size: 15px;
 	background-color: silver;
 }
+.red {
+	color: Red;
+}
+.balanz {
+	color: Green;
+	font-stretch: normal;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: bold;
+}
+.fettig {
+	font-style: normal;
+	font-weight: bold;
+}
+.rahmen {
+	border: thin inset Black;
+}
+.norm {
+	font-style: normal;
+}
