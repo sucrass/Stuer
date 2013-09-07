@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
@@ -19,6 +20,7 @@ import de.eimantas.steuer.client.ui.main.dashboard.widget.AbstractChart.DataMode
 public class MainView extends Composite implements MainDisplay {
 	private ObereLeisteImpl obereLeiste;
 	private List<DataModel> listData;
+	private VerticalPanel verticalPanel_1;
 
 	public MainView() {
 		super();
@@ -52,7 +54,7 @@ public class MainView extends Composite implements MainDisplay {
 
 		horizontalPanel_2.add(linkeLeiste);
 		horizontalPanel_2.add(mainDynContainer);
-		VerticalPanel verticalPanel_1 = new VerticalPanel();
+		verticalPanel_1 = new VerticalPanel();
 		mainDynContainer.add(verticalPanel_1);
 		verticalPanel_1.setSize("100%", "100%");
 		mainDynContainer.setCellHeight(verticalPanel_1, "100%");
@@ -93,6 +95,7 @@ public class MainView extends Composite implements MainDisplay {
 				"newHistoryToken");
 		hprlnkDatenschutz.setHTML("Datenschutz");
 		horizontalPanel.add(hprlnkDatenschutz);
+
 	}
 
 	public HasClickHandlers getAddButton() {
@@ -112,6 +115,10 @@ public class MainView extends Composite implements MainDisplay {
 
 	public int getClickedRow(ClickEvent event) {
 		return 0;
+	}
+
+	public HasWidgets getDynContainer() {
+		return verticalPanel_1;
 	}
 
 }

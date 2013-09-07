@@ -1,5 +1,6 @@
 package de.eimantas.steuer.client.control;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -7,9 +8,11 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 import de.eimantas.steuer.client.MainServiceAsync;
+import de.eimantas.steuer.client.control.presenter.ErfassenPresenter;
 import de.eimantas.steuer.client.control.presenter.MainPresenter;
 import de.eimantas.steuer.client.control.presenter.Presenter;
 import de.eimantas.steuer.client.ui.main.MainView;
+import de.eimantas.steuer.client.ui.neu.NeuEintragView;
 import de.eimantas.steuer.shared.event.AddEintragEvent;
 import de.eimantas.steuer.shared.event.AddEintragEventHandler;
 
@@ -18,6 +21,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private MainServiceAsync rpcService;
 	private HandlerManager eventBus;
 	private HasWidgets container;
+	private MainView mainView;
 
 	public AppController(MainServiceAsync rpcService, HandlerManager eventBus) {
 		this.rpcService = rpcService;
@@ -44,11 +48,19 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			Presenter presenter = null;
 
 			if (token.equals("dash")) {
-				presenter = new MainPresenter(rpcService, eventBus,
-						new MainView());
+				if (mainView == null) {
+					mainView = new MainView();
+				}
+				presenter = new MainPresenter(rpcService, eventBus, mainView);
+				presenter.go(container);
 			} else if (token.equals("neu")) {
-				presenter = new MainPresenter(rpcService, eventBus,
-						new MainView());
+				if (mainView != null) {
+					presenter = new ErfassenPresenter(rpcService, eventBus,
+							new NeuEintragView());
+					presenter.go(mainView.getDynContainer());
+				} else {
+					GWT.log("No Container zum Anzeigen", null);
+				}
 			}
 			// else if (token.equals("add")) {
 			// presenter = new EditContactPresenter(rpcService, eventBus,
@@ -57,9 +69,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			// presenter = new EditContactPresenter(rpcService, eventBus,
 			// new EditContactView());
 			// }
-			if (presenter != null) {
-				presenter.go(container);
-			}
 
 		}
 
