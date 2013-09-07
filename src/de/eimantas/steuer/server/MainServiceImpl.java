@@ -1,6 +1,6 @@
 package de.eimantas.steuer.server;
 
-import de.eimantas.steuer.client.GreetingService;
+import de.eimantas.steuer.client.MainService;
 import de.eimantas.steuer.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -8,8 +8,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements
-		GreetingService {
+public class MainServiceImpl extends RemoteServiceServlet implements
+		MainService {
 
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 

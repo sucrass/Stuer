@@ -1,6 +1,9 @@
 package de.eimantas.steuer.client.ui.main;
 
-import com.google.gwt.user.client.ui.Button;
+import java.util.List;
+
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -9,15 +12,19 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.eimantas.steuer.client.control.presenter.MainDisplay;
 import de.eimantas.steuer.client.ui.main.dashboard.Dashboard;
+import de.eimantas.steuer.client.ui.main.dashboard.widget.AbstractChart.DataModel;
 
-public class MainView extends Composite {
+public class MainView extends Composite implements MainDisplay {
+	private ObereLeisteImpl obereLeiste;
+	private List<DataModel> listData;
+
 	public MainView() {
 		super();
 		VerticalPanel mainLayout = new VerticalPanel();
 		initWidget(mainLayout);
 		mainLayout.setSize("100%", "100%");
-		Button b = new Button();
 
 		HorizontalPanel obereLayout = new HorizontalPanel();
 		obereLayout.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -25,7 +32,7 @@ public class MainView extends Composite {
 		mainLayout.add(obereLayout);
 		obereLayout.setSize("100%", "15px");
 
-		ObereLeiste obereLeiste = new ObereLeiste();
+		obereLeiste = new ObereLeiste();
 		obereLayout.add(obereLeiste);
 		obereLeiste.setWidth("100%");
 
@@ -87,4 +94,24 @@ public class MainView extends Composite {
 		hprlnkDatenschutz.setHTML("Datenschutz");
 		horizontalPanel.add(hprlnkDatenschutz);
 	}
+
+	public HasClickHandlers getAddButton() {
+		if (obereLeiste != null) {
+			return obereLeiste.getAddButton();
+		}
+		return null;
+	}
+
+	public List<DataModel> getList() {
+		return listData;
+	}
+
+	public void setData(List<DataModel> data) {
+		this.listData = data;
+	}
+
+	public int getClickedRow(ClickEvent event) {
+		return 0;
+	}
+
 }
