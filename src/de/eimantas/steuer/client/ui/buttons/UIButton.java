@@ -1,4 +1,4 @@
-package de.eimantas.steuer.client.ui.main;
+package de.eimantas.steuer.client.ui.buttons;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.sencha.gxt.widget.core.client.button.TextButton;

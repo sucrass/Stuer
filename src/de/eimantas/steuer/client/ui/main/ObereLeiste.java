@@ -3,13 +3,16 @@ package de.eimantas.steuer.client.ui.main;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
+import de.eimantas.steuer.client.ui.buttons.UIButton;
+import de.eimantas.steuer.client.ui.resources.Images;
+
 public class ObereLeiste extends Composite {
 	public ObereLeiste() {
 
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setStyleName("leisteOben");
 		initWidget(horizontalPanel);
-		horizontalPanel.setSize("100%", "5%");
+		horizontalPanel.setSize("", "5%");
 
 		UIButton button = new UIButton("Home", Images.INSTANCE.home());
 		horizontalPanel.add(button);
@@ -26,6 +29,7 @@ public class ObereLeiste extends Composite {
 
 		HorizontalPanel horizontalPanel_1 = new HorizontalPanel();
 		horizontalPanel.add(horizontalPanel_1);
+		horizontalPanel_1.setWidth("100%");
 	}
 
 }
