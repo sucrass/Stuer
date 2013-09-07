@@ -14,7 +14,7 @@
 		<servlet-name>FileUploadGreeting</servlet-name>
 		<url-pattern>/FileUploadGreeting</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>greetServlet</servlet-name>
 		<servlet-class>de.eimantas.steuer.server.MainServiceImpl</servlet-class>
@@ -25,7 +25,30 @@
 		<url-pattern>/de.eimantas.steuer.SteuerMain/greet</url-pattern>
 	</servlet-mapping>
 
+	<context-param>
+		<!-- max size of the upload request -->
+		<param-name>maxSize</param-name>
+		<param-value>3145728</param-value>
+	</context-param>
+	<context-param>
+		<!-- Useful in development mode to slow down the uploads in fast networks. 
+			Put the number of milliseconds to sleep in each block received in the server. 
+			false or 0, means don't use slow uploads -->
+		<param-name>slowUploads</param-name>
+		<param-value>200</param-value>
+	</context-param>
 
+	<servlet>
+		<servlet-name>uploadServlet</servlet-name>
+		<!-- This is the default servlet, it puts files in session -->
+<!-- 		<servlet-class>gwtupload.server.UploadServlet</servlet-class> -->
+			<servlet-class>	de.eimantas.steuer.server.SampleUploadServlet</servlet-class>
+	
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadServlet</servlet-name>
+		<url-pattern>*.gupld</url-pattern>
+	</servlet-mapping>
 
 
 	<!-- Default page to serve -->
