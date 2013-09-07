@@ -3,53 +3,27 @@ package de.eimantas.steuer.client.ui.main;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MainView extends Composite {
 	public MainView() {
-
+		super();
 		VerticalPanel verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
+		verticalPanel.setSize("100%", "100%");
+		Button b = new Button();
 
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		horizontalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		horizontalPanel.setSpacing(5);
 		verticalPanel.add(horizontalPanel);
-		horizontalPanel.setWidth("100%");
+		horizontalPanel.setSize("100%", "15px");
 
-		Hyperlink hprlnkSettings = new Hyperlink("Settings", false,
-				"newHistoryToken");
-		hprlnkSettings.setHTML("Fotos");
-		horizontalPanel.add(hprlnkSettings);
-
-		Hyperlink hprlnkKategorien = new Hyperlink("Kategorien", false,
-				"newHistoryToken");
-		horizontalPanel.add(hprlnkKategorien);
-
-		Hyperlink hyperlink = new Hyperlink("Kategorien", false,
-				"newHistoryToken");
-		hyperlink.setHTML("Sonstiges");
-		horizontalPanel.add(hyperlink);
-
-		HorizontalPanel horizontalPanel_1 = new HorizontalPanel();
-		horizontalPanel_1
-				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		horizontalPanel_1.setSpacing(10);
-		horizontalPanel.add(horizontalPanel_1);
-		horizontalPanel.setCellHorizontalAlignment(horizontalPanel_1,
-				HasHorizontalAlignment.ALIGN_RIGHT);
-
-		Image image = new Image((String) null);
-		horizontalPanel_1.add(image);
-		image.setSize("30px", "30px");
-
-		Button btnNewButton = new Button("Settings");
-		horizontalPanel_1.add(btnNewButton);
+		ObereLeiste obereLeiste = new ObereLeiste();
+		horizontalPanel.add(obereLeiste);
+		obereLeiste.setWidth("100%");
 
 		HorizontalPanel horizontalPanel_2 = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel_2);
@@ -90,5 +64,4 @@ public class MainView extends Composite {
 		verticalPanel_1.add(cellTable);
 		cellTable.setSize("100%", "100%");
 	}
-
 }

@@ -33,3 +33,7 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+.leisteOben {
+	font-size: 16px;
+	background-color: silver;
+}
