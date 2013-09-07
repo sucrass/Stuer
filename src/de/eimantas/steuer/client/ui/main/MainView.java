@@ -36,23 +36,10 @@ public class MainView extends Composite {
 		horizontalPanel_3.setSize("100%", "100%");
 
 		VerticalPanel verticalPanel_2 = new VerticalPanel();
-		horizontalPanel_3.add(verticalPanel_2);
-		verticalPanel_2.setSize("", "100%");
 
-		Button btnNachDatum = new Button("Nach Datum");
-		verticalPanel_2.add(btnNachDatum);
+		verticalPanel_2.add(new LinkeLeiste().asWidget());
 
-		Button btnNachOrt = new Button("Nach Ort");
-		verticalPanel_2.add(btnNachOrt);
-
-		Button btnNachKategorie = new Button("Nach Kategorie");
-		verticalPanel_2.add(btnNachKategorie);
-
-		Button btnNachKommentar = new Button("Nach Kommentar");
-		verticalPanel_2.add(btnNachKommentar);
-
-		Button btnUnbekante = new Button("Unbekannte");
-		verticalPanel_2.add(btnUnbekante);
+		horizontalPanel_2.add(verticalPanel_2);
 
 		VerticalPanel verticalPanel_1 = new VerticalPanel();
 		horizontalPanel_3.add(verticalPanel_1);

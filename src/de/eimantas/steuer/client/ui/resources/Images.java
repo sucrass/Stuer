@@ -20,4 +20,13 @@ public interface Images extends ClientBundle {
 	@Source("home.png")
 	ImageResource home();
 
+	@Source("car.png")
+	ImageResource auto();
+
+	@Source("date.png")
+	ImageResource datum();
+
+	@Source("comment.png")
+	ImageResource komment();
+
 }
