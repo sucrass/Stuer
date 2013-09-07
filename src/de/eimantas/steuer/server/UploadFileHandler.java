@@ -19,7 +19,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
-import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -125,8 +124,6 @@ public class UploadFileHandler extends HttpServlet {
 			out.flush();
 			out.close();
 
-		} catch (SizeLimitExceededException e) {
-			System.out.println("File size exceeds the limit : 1 MB!!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			PrintWriter out = response.getWriter();
