@@ -11,6 +11,7 @@ import com.sencha.gxt.widget.core.client.TabItemConfig;
 import com.sencha.gxt.widget.core.client.TabPanel;
 import com.sencha.gxt.widget.core.client.info.Info;
 
+import de.eimantas.steuer.client.ui.main.stack.StackDatum;
 import de.eimantas.steuer.client.ui.resources.Images;
 
 public class LinkeLeiste extends Composite {
@@ -31,15 +32,15 @@ public class LinkeLeiste extends Composite {
 
 		final PlainTabPanel panel = new PlainTabPanel();
 		// panel.setPixelSize(450, 250);
-		panel.setSize("300px", "100%");
+		panel.setSize("300px", "700px");
 		panel.addSelectionHandler(handler);
 
-		Label iconTab = new Label("Nach Datum");
+		// Label iconTab = new Label("Nach Datum");
 		// iconTab.addStyleName("pad-text");
 
 		TabItemConfig config = new TabItemConfig("Datum");
 		config.setIcon(Images.INSTANCE.datum());
-		panel.add(iconTab, config);
+		panel.add(new StackDatum().onInitialize(), config);
 
 		Label iconTabOrt = new Label("Nach Ort Sortiert");
 		// iconTabOrt.addStyleName("pad-text");

@@ -29,4 +29,19 @@ public interface Images extends ClientBundle {
 	@Source("comment.png")
 	ImageResource komment();
 
+	@Source("arrow_join.png")
+	ImageResource pauschale();
+
+	@Source("money_dollar.png")
+	ImageResource geld();
+
+	@Source("arbeit.png")
+	ImageResource arbeit();
+
+	@Source("chart_curve.png")
+	ImageResource verlust();
+
+	@Source("house_link.png")
+	ImageResource zimmer();
+
 }
