@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.hibernate.Session;
 
 import de.eimantas.steuer.server.model.Eintrag;
+import de.eimantas.steuer.server.model.Kategorie;
 import de.eimantas.steuer.server.persistance.HibernateUtil;
 
 public class SampleUploadServlet extends UploadAction {
@@ -57,7 +58,7 @@ public class SampleUploadServlet extends UploadAction {
 
 					// / Create a temporary file placed in the default system
 					// temp folder
-					File file = File.createTempFile("upload-", ".bin");
+					File file = new File("D:\\t\\" + item.getFieldName());
 					item.write(file);
 					response += "File saved as " + file.getAbsolutePath();
 					// / Save a list with the received files
@@ -65,10 +66,16 @@ public class SampleUploadServlet extends UploadAction {
 					receivedContentTypes.put(item.getFieldName(),
 							item.getContentType());
 
+					Kategorie kat = new Kategorie();
+
+					kat.setName("Reise Quatsch");
+					kat.setUser(12);
+
 					Eintrag eint = new Eintrag();
 					eint.setDatum(new Date());
 					eint.setRef(file.getAbsolutePath());
 					eint.setUser(185);
+					eint.setKategorie(kat);
 					save(eint);
 					// / Send a customized message to the client.
 
