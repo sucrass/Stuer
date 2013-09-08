@@ -2,7 +2,6 @@ package de.eimantas.steuer.client.ui.main.dashboard;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.eimantas.steuer.client.ui.main.dashboard.widget.AnderePie;
@@ -24,7 +23,7 @@ public class Dashboard extends Composite {
 		hauptPanel.add(ersteTier);
 
 		HorizontalPanel zweiteTier = new HorizontalPanel();
-		zweiteTier.add(new Label("tests"));
+
 		zweiteTier.add(new PieChart().asWidget());
 		zweiteTier.add(new LineChart().asWidget());
 		zweiteTier.add(new AnderePie().asWidget());

@@ -117,6 +117,7 @@ public abstract class AbstractChart implements IsWidget {
 		listStore.add(item2);
 		listStore.add(item3);
 		listStore.add(item4);
+
 	}
 
 	public abstract Widget asWidget();

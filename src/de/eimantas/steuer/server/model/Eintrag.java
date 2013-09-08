@@ -1,6 +1,7 @@
 package de.eimantas.steuer.server.model;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,7 +12,7 @@ public class Eintrag {
 	String ref;
 	@Id
 	@GeneratedValue
-	String id;
+	int id;
 	int user;
 	Date datum;
 
@@ -23,11 +24,11 @@ public class Eintrag {
 		this.ref = ref;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

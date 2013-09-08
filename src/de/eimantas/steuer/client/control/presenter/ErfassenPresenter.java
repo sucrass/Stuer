@@ -21,6 +21,7 @@ public class ErfassenPresenter implements Presenter {
 	}
 
 	public void go(HasWidgets container) {
+
 		bind();
 		container.clear();
 		container.add(display.asWidget());

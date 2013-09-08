@@ -7,25 +7,18 @@ import gwtupload.shared.UConsts;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Properties;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import de.eimantas.steuer.server.model.Eintrag;
+import de.eimantas.steuer.server.persistance.HibernateUtil;
 
 public class SampleUploadServlet extends UploadAction {
 
@@ -36,8 +29,6 @@ public class SampleUploadServlet extends UploadAction {
 	 * Maintain a list with received files and their content types.
 	 */
 	Hashtable<String, File> receivedFiles = new Hashtable<String, File>();
-
-	private ServiceRegistry serviceRegistry;
 
 	/**
 	 * Override executeAction to save the received files in a custom place and
@@ -75,8 +66,10 @@ public class SampleUploadServlet extends UploadAction {
 							item.getContentType());
 
 					Eintrag eint = new Eintrag();
-
-					// save(eint);
+					eint.setDatum(new Date());
+					eint.setRef(file.getAbsolutePath());
+					eint.setUser(185);
+					save(eint);
 					// / Send a customized message to the client.
 
 				} catch (Exception e) {
@@ -93,43 +86,14 @@ public class SampleUploadServlet extends UploadAction {
 	}
 
 	private void save(Eintrag eint) {
-		SessionFactory factory;
 
-		try {
-			// factory = new AnnotationConfiguration().configure()
-			// .buildSessionFactory();
-			Properties env = new Properties();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-			env.put("java.naming.factory.initial",
-					"com.sun.jndi.cosnaming.CNCtxFactory");
+		session.beginTransaction();
 
-			Context ctx = new InitialContext(env);
-			Configuration configuration = new Configuration();
-			configuration.configure();
-			serviceRegistry = new ServiceRegistryBuilder().applySettings(
-					configuration.getProperties()).buildServiceRegistry();
-			factory = configuration.buildSessionFactory(serviceRegistry);
+		session.save(eint);
 
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
-
-		Session session = factory.openSession();
-		Transaction tx = null;
-		Integer employeeID = null;
-		try {
-			tx = session.beginTransaction();
-			employeeID = (Integer) session.save(eint);
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+		session.getTransaction().commit();
 
 	}
 

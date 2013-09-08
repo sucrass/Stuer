@@ -9,10 +9,7 @@ import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.eimantas.steuer.client.control.presenter.NeuEintragViewInf;
@@ -20,23 +17,20 @@ import de.eimantas.steuer.client.ui.buttons.UIButton;
 import de.eimantas.steuer.client.ui.resources.Images;
 
 public class NeuEintragView extends Composite implements NeuEintragViewInf {
-	private FormPanel form;
+
 	private UIButton but = new UIButton("test", Images.INSTANCE.arbeit());
-	private VerticalPanel vPanel;
-	private FileUpload fileUpload;
+
 	private FlowPanel panelImages;
 	private MultiUploader defaultUploader;
 
 	public NeuEintragView() {
 		panelImages = new FlowPanel();
-
 		// Create a new uploader panel and attach it to the document
 		defaultUploader = new MultiUploader();
 
 		// Add a finish handler which will load the image once the upload
 		// finishes
 		defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-
 		// Load the image in the document and in the case of success attach it
 		// to the viewer
 
