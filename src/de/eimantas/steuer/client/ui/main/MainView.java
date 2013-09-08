@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import de.eimantas.steuer.client.control.presenter.MainDisplay;
 import de.eimantas.steuer.client.ui.main.dashboard.Dashboard;
@@ -21,6 +22,7 @@ public class MainView extends Composite implements MainDisplay {
 	private ObereLeisteImpl obereLeiste;
 	private List<DataModel> listData;
 	private VerticalPanel verticalPanel_1;
+	private VerticalPanel linkeLeiste;
 
 	public MainView() {
 		super();
@@ -48,9 +50,7 @@ public class MainView extends Composite implements MainDisplay {
 
 		mainDynContainer.setSize("100%", "100%");
 
-		VerticalPanel linkeLeiste = new VerticalPanel();
-
-		linkeLeiste.add(new LinkeLeiste().asWidget());
+		linkeLeiste = new VerticalPanel();
 
 		horizontalPanel_2.add(linkeLeiste);
 		horizontalPanel_2.add(mainDynContainer);
@@ -119,6 +119,10 @@ public class MainView extends Composite implements MainDisplay {
 
 	public HasWidgets getDynContainer() {
 		return verticalPanel_1;
+	}
+
+	public void addLinkeLeiste(Widget w) {
+		linkeLeiste.add(w);
 	}
 
 }

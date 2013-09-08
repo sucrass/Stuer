@@ -9,8 +9,10 @@ import com.google.gwt.user.client.ui.HasWidgets;
 
 import de.eimantas.steuer.client.MainServiceAsync;
 import de.eimantas.steuer.client.control.presenter.ErfassenPresenter;
+import de.eimantas.steuer.client.control.presenter.LinkeLeisteIf;
 import de.eimantas.steuer.client.control.presenter.MainPresenter;
 import de.eimantas.steuer.client.control.presenter.Presenter;
+import de.eimantas.steuer.client.ui.main.LinkeLeiste;
 import de.eimantas.steuer.client.ui.main.MainView;
 import de.eimantas.steuer.client.ui.neu.NeuEintragView;
 import de.eimantas.steuer.shared.event.AddEintragEvent;
@@ -22,6 +24,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private HandlerManager eventBus;
 	private HasWidgets container;
 	private MainView mainView;
+	private LinkeLeisteIf linkeLeiste;
 
 	public AppController(MainServiceAsync rpcService, HandlerManager eventBus) {
 		this.rpcService = rpcService;
@@ -34,6 +37,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 		eventBus.addHandler(AddEintragEvent.TYPE, new AddEintragEventHandler() {
 
+			@Override
 			public void onAddEintrag(AddEintragEvent event) {
 				History.newItem("neu");
 			}
@@ -41,6 +45,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	}
 
+	@Override
 	public void onValueChange(ValueChangeEvent<String> event) {
 		String token = event.getValue();
 
@@ -51,7 +56,12 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 				if (mainView == null) {
 					mainView = new MainView();
 				}
-				presenter = new MainPresenter(rpcService, eventBus, mainView);
+
+				if (linkeLeiste == null) {
+					linkeLeiste = new LinkeLeiste();
+				}
+				presenter = new MainPresenter(rpcService, eventBus, mainView,
+						linkeLeiste);
 				presenter.go(container);
 			} else if (token.equals("neu")) {
 				if (mainView != null) {
@@ -74,6 +84,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	}
 
+	@Override
 	public void go(HasWidgets container) {
 		this.container = container;
 

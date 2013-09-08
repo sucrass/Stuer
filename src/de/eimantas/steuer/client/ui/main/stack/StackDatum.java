@@ -1,5 +1,7 @@
 package de.eimantas.steuer.client.ui.main.stack;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,8 +20,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.eimantas.steuer.client.ui.resources.Images;
+import de.eimantas.steuer.shared.model.KategoriesPOJO;
 
 public class StackDatum extends Widget {
+
+	private ArrayList<KategoriesPOJO> data;
+
+	public StackDatum(ArrayList<KategoriesPOJO> result) {
+		this.data = result;
+	}
 
 	public Widget onInitialize() {
 		// Get the images.
@@ -29,23 +38,39 @@ public class StackDatum extends Widget {
 		StackLayoutPanel stackPanel = new StackLayoutPanel(Unit.EM);
 		stackPanel.setPixelSize(200, 400);
 
-		// Add a list of contacts.
-		Widget contactsHeader = createHeaderWidget("Reise Kosten",
-				Images.INSTANCE.pauschale());
-		stackPanel.add(createContactsItem(images), contactsHeader, 4);
+		// Widget contactsHeader = createHeaderWidget("Reise Kosten",
+		// Images.INSTANCE.pauschale());
+		// stackPanel.add(createContactsItem(images), contactsHeader, 4);
+		//
+		// Widget arbeitHeader = createHeaderWidget("Arbeits Mittel",
+		// Images.INSTANCE.arbeit());
+		// stackPanel.add(createContactsItem(images), arbeitHeader, 4);
+		//
+		// Widget zimmerHeader = createHeaderWidget("Arbeits Zimmer",
+		// Images.INSTANCE.zimmer());
+		// stackPanel.add(createContactsItem(images), zimmerHeader, 4);
+		//
+		// Widget verlustHeader = createHeaderWidget("Verluste aus Kapital",
+		// Images.INSTANCE.verlust());
+		// stackPanel.add(createContactsItem(images), verlustHeader, 4);
 
-		// Stack Items
-		Widget arbeitHeader = createHeaderWidget("Arbeits Mittel",
-				Images.INSTANCE.arbeit());
-		stackPanel.add(createContactsItem(images), arbeitHeader, 4);
+		if (data != null) {
+			for (KategoriesPOJO pojo : data) {
 
-		Widget zimmerHeader = createHeaderWidget("Arbeits Zimmer",
-				Images.INSTANCE.zimmer());
-		stackPanel.add(createContactsItem(images), zimmerHeader, 4);
+				ImageResource img = Images.INSTANCE.arbeit();
+				if (pojo.getIcon() != null
+						&& pojo.getIcon().equalsIgnoreCase("reise")) {
+					img = Images.INSTANCE.pauschale();
+				}
 
-		Widget verlustHeader = createHeaderWidget("Verluste aus Kapital",
-				Images.INSTANCE.verlust());
-		stackPanel.add(createContactsItem(images), verlustHeader, 4);
+				Widget verlustHeader = createHeaderWidget(pojo.getKategorie(),
+						img);
+				stackPanel.add(createContactsItem(images), verlustHeader, 4);
+				System.out.println("adding POJO");
+			}
+		} else {
+			GWT.log("Keine DATA dazu!!!!", null);
+		}
 
 		// END OF Stack Items
 
@@ -84,6 +109,7 @@ public class StackDatum extends Widget {
 
 			// Open the contact info popup when the user clicks a contact
 			contactLink.addClickHandler(new ClickHandler() {
+				@Override
 				public void onClick(ClickEvent event) {
 					// Set the info about the contact
 					SafeHtmlBuilder sb = new SafeHtmlBuilder();

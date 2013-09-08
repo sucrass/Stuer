@@ -7,9 +7,12 @@ import gwtupload.shared.UConsts;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,18 +69,26 @@ public class SampleUploadServlet extends UploadAction {
 					receivedContentTypes.put(item.getFieldName(),
 							item.getContentType());
 
-					Kategorie kat = new Kategorie();
+					ArrayList<String> names = new ArrayList<String>(
+							Arrays.asList("Reise", "Arbeit", "Verlust",
+									"Doppelhaushalt", "Fortbildung"));
+					Random r = new Random();
+					for (int i = 0; i < 5; i++) {
+						Kategorie kat = new Kategorie();
+						kat.setIcon("reise");
+						kat.setName(names.get(i));
+						kat.setUser(r.nextInt(20));
 
-					kat.setName("Reise Quatsch");
-					kat.setUser(12);
-
-					Eintrag eint = new Eintrag();
-					eint.setDatum(new Date());
-					eint.setRef(file.getAbsolutePath());
-					eint.setUser(185);
-					eint.setKategorie(kat);
-					save(eint);
-					// / Send a customized message to the client.
+						for (int b = 0; b < 10; b++) {
+							Eintrag eint = new Eintrag();
+							eint.setDatum(new Date());
+							eint.setRef(file.getAbsolutePath());
+							eint.setUser(r.nextInt(20));
+							eint.setKategorie(kat);
+							save(eint);
+							// / Send a customized message to the client.
+						}
+					}
 
 				} catch (Exception e) {
 					throw new UploadActionException(e);

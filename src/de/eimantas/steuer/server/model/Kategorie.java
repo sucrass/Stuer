@@ -12,6 +12,16 @@ public class Kategorie {
 	int id;
 
 	String name;
+	String icon;
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
 	int user;
 
 	public int getId() {

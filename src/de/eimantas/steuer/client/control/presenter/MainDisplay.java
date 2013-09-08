@@ -13,6 +13,8 @@ public interface MainDisplay {
 
 	List<DataModel> getList();
 
+	void addLinkeLeiste(Widget w);
+
 	void setData(List<DataModel> data);
 
 	int getClickedRow(ClickEvent event);
